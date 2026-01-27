@@ -1,3 +1,19 @@
+CREATE TABLE january_jobs AS 
+SELECT  *
+FROM job_postings_fact
+WHERE EXTRACT(MONTH FROM job_posted_date) = 1;
+
+CREATE TABLE february_jobs AS 
+SELECT  *
+FROM job_postings_fact
+WHERE EXTRACT(MONTH FROM job_posted_date) =2;
+
+CREATE TABLE march_jobs AS 
+SELECT  *
+FROM job_postings_fact
+WHERE EXTRACT(MONTH FROM job_posted_date) = 3;
+
+
 
 SELECT 
        COUNT(job_id) AS total_job_postings,
@@ -6,13 +22,6 @@ FROM job_postings_fact
 WHERE job_title_short = 'Data Scientist'
 GROUP BY month
 ORDER BY total_job_postings DESC;
-
-
-
-
-
-
-
 
 SELECT * FROM company_dim LIMIT 5;
 SELECT * FROM skills_dim LIMIT 5;
