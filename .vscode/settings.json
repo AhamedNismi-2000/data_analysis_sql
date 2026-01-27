@@ -16,8 +16,8 @@
             "server": "localhost",
             "port": 5432,
             "driver": "PostgreSQL",
-            "name": "jobs_data",
-            "database": "jobs_data",
+            "name": "sql_course",
+            "database": "sql_course",
             "username": "postgres"
         }
     ]
