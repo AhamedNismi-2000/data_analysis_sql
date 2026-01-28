@@ -19,3 +19,7 @@ END AS  location_category
 FROM job_postings_fact
 WHERE job_title_short = 'Data Analyst'
 GROUP BY location_category;
+
+
+
+
