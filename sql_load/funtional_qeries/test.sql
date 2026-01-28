@@ -1,3 +1,6 @@
+-- This is the version of the query without GROUP BY clause
+-- It will return an error because of the non-aggregated columns in SELECT
+-- Example there is an aggregate function (COUNT) in the SELECT clause
 SELECT  
         cd.name AS company_name,
        jpf.job_posted_date :: DATE AS posted_date ,
