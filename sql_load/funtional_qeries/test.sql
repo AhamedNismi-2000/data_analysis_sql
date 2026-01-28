@@ -18,6 +18,15 @@ WHERE filters rows before GROUP BY — only rows that pass WHERE are grouped
 If you want aggregation across all rows without grouping, you can skip GROUP BY
 */
 
+SELECT  
+        cd.name AS company_name,
+       jpf.job_posted_date :: DATE AS posted_date ,
+       EXTRACT(QUARTER FROM jpf.job_posted_date) AS posting_quarter,
+       COUNT(*)
+FROM company_dim 
+JOIN job_postings_fact       
+ON cd.company_id = jpf.company_id
+WHERE EXTRACT(QUARTER FROM jpf.job_posted_date) = 2
 
 
 
