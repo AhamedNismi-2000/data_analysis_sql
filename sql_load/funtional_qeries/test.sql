@@ -27,7 +27,7 @@ SELECT
        EXTRACT(QUARTER FROM jpf.job_posted_date) AS quarter,
        COUNT(*)
 FROM company_dim AS cd
-JOIN job_postings_fact AS jpf      
+JOIN job_postings_fact AS jpf
 ON cd.company_id = jpf.company_id
 WHERE EXTRACT(QUARTER FROM jpf.job_posted_date) = 2
 GROUP BY company_name, 
