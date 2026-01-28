@@ -31,12 +31,6 @@ GROUP BY company_name,
          posted_date, 
          EXTRACT(QUARTER FROM jpf.job_posted_date);
 
-
-
-
-
-
-
 CREATE TABLE january_jobs AS 
 SELECT  *
 FROM job_postings_fact
