@@ -21,12 +21,16 @@ If you want aggregation across all rows without grouping, you can skip GROUP BY
 SELECT  
         cd.name AS company_name,
        jpf.job_posted_date :: DATE AS posted_date ,
-       EXTRACT(QUARTER FROM jpf.job_posted_date) AS posting_quarter,
+       EXTRACT(QUARTER FROM jpf.job_posted_date) AS quarter,
        COUNT(*)
-FROM company_dim 
-JOIN job_postings_fact       
+FROM company_dim AS cd
+JOIN job_postings_fact AS jpf      
 ON cd.company_id = jpf.company_id
 WHERE EXTRACT(QUARTER FROM jpf.job_posted_date) = 2
+GROUP BY company_name, 
+         posted_date, 
+         EXTRACT(QUARTER FROM jpf.job_posted_date);
+
 
 
 
