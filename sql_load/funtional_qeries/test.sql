@@ -11,6 +11,19 @@ JOIN job_postings_fact AS jpf
 ON cd.company_id = jpf.company_id
 WHERE EXTRACT(QUARTER FROM jpf.job_posted_date) = 2
 
+SELECT 
+      job_title_short,
+      job_location
+CASE
+    WHEN job_location ='Anywhere' THEN 'Remote'
+    WHEN job_location ='New York , NY ' THEN 'Local'
+    ELSE 'Hybrid'
+
+END AS location_type
+FROM job_postings_fact;
+
+
+
 -- Rule for the GROUP BY clause
 /* Always include in GROUP BY: all non-aggregated columns in SELECT
 
@@ -33,6 +46,8 @@ WHERE EXTRACT(QUARTER FROM jpf.job_posted_date) = 2
 GROUP BY company_name, 
          posted_date, 
          EXTRACT(QUARTER FROM jpf.job_posted_date);
+
+
 
 CREATE TABLE january_jobs AS 
 SELECT  *
@@ -71,6 +86,10 @@ SELECT * FROM skills_job_dim LIMIT 5;
           company_dim;
 */
 
-      
+
+
+
+
+
 
 

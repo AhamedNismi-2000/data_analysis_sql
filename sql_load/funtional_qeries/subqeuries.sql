@@ -26,15 +26,20 @@ FROM   job_postings_fact
 GROUP BY company_id
 
 
-
-
-WITH company_job_count AS (
-SELECT company_id,
-        COUNT(*)
-FROM job_postings_fact
-GROUP BY company_id
+-- this query lists companies along with their job posting counts, ordered by the number of postings in descending order
+WITH company_job_counts AS (
+     SELECT company_id,
+            COUNT(*) AS job_count
+     FROM   job_postings_fact
+     GROUP BY company_id
 )
-SELECT *
-FROM company_job_count;
-        
+SELECT 
+    company_dim.name AS  company_name,
+    company_job_counts.job_count
+    FROM company_dim
+    LEFT JOIN company_job_counts
+    ON company_dim.company_id = company_job_counts.company_id
+    ORDER BY company_job_counts.job_count DESC;
+
+
  
