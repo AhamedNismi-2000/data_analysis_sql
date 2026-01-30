@@ -67,3 +67,29 @@ SELECT sjp.skill_id,
        WHERE jjob.salary_year_avg IS NOT NULL AND job_title_short = 'Data Scientist'
        ORDER BY average_salary DESC
        LIMIT 100;
+
+
+-- Job Posted in 2023 Q1 for Data Scientist positions with highest average salaries
+
+WITH skill_job_postings AS (
+    SELECT
+         sd.skill_id,
+         sd.skills AS skill_name,
+         sd.type AS skill_type,
+         sjd.job_id      
+    FROM skills_dim AS sd 
+    INNER JOIN skills_job_dim AS sjd
+    ON sd.skill_id = sjd.skill_id
+)
+SELECT sjp.skill_id,
+       sjp.skill_name,
+        jpf.job_title_short,
+        jpf.salary_year_avg AS average_salary,
+       EXTRACT(QUARTER FROM jpf.job_posted_date) AS job_posted_quarter
+       
+       FROM skill_job_postings AS sjp
+       INNER JOIN job_postings_fact AS jpf
+       ON sjp.job_id = jpf.job_id 
+       WHERE jpf.salary_year_avg IS NOT NULL AND job_title_short = 'Data Scientist'
+       ORDER BY average_salary DESC
+       LIMIT 100;     
