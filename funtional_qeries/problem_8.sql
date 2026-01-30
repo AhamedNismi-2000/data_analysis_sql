@@ -33,7 +33,8 @@ WITH job_postings_quarter1 AS (
     UNION
     SELECT *
     FROM march_jobs
-)
+)SELECT * FROM job_postings_quarter1;
+
 SELECT job_title_short,
        job_location,
        job_via,
@@ -42,3 +43,4 @@ SELECT job_title_short,
 FROM job_postings_quarter1
 WHERE salary_year_avg > 70000 AND job_title_short = 'Data Scientist'
 ORDER BY salary_year_avg DESC;
+
