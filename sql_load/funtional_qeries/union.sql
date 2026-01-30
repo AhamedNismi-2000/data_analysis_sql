@@ -38,3 +38,6 @@ SELECT job_title_short,
        job_location,
        salary_year_avg
 FROM   march_jobs;
+
+
+

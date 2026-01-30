@@ -43,3 +43,27 @@ SELECT
 
 
  
+-- Find the top 100 skills for Data Scientist positions in January with highest average salaries
+WITH skill_job_postings AS (
+    SELECT
+         sd.skill_id,
+         sd.skills AS skill_name,
+         sd.type AS skill_type,
+         sjd.job_id      
+    FROM skills_dim AS sd 
+    INNER JOIN skills_job_dim AS sjd
+    ON sd.skill_id = sjd.skill_id
+)
+
+SELECT sjp.skill_id,
+       sjp.skill_name,
+       jjob.job_title_short,
+       jjob.salary_year_avg AS average_salary,
+       EXTRACT(DAY FROM jjob.job_posted_date) AS job_posted_DAY
+       
+       FROM skill_job_postings AS sjp
+       INNER JOIN january_jobs AS jjob
+       ON sjp.job_id = jjob.job_id 
+       WHERE jjob.salary_year_avg IS NOT NULL AND job_title_short = 'Data Scientist'
+       ORDER BY average_salary DESC
+       LIMIT 100;
