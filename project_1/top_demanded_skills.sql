@@ -10,7 +10,7 @@
  
 -- This is Top Demanded Skills for Data Scientist 
 SELECT sd.skills AS skill_name,
-    COUNT(sjd.job_id) AS skill_count,
+    COUNT(sjd.job_id) AS demand_count,
     jpf.salary_year_avg
 FROM job_postings_fact AS jpf
     INNER JOIN skills_job_dim as sjd ON jpf.job_id = sjd.job_id
